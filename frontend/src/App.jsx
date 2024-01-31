@@ -15,9 +15,13 @@ const App = () => {
     username: "Joe Example",
     profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
   };
+  const photos = [... Array(3)].map(() => sampleDataForPhotoListItem);
+  console.log(photos);
   return (
     <div className="App">
-      <PhotoListItem photo={sampleDataForPhotoListItem} />
+      {photos.map((photo) => (
+        <PhotoListItem key={photo.id} photo={photo} />
+      ))}
     </div>
   );
 };
