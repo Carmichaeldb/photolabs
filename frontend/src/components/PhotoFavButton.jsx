@@ -7,7 +7,7 @@ const PhotoFavButton = () => {
   const [selected, setSelected] = useState(false);
 
   const favClicked = () => {
-    setSelected(selected === true ? false : true);
+    setSelected(prevSelected => !prevSelected);
   };
 
   return (
