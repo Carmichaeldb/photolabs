@@ -1,11 +1,10 @@
 import React from "react";
-
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-const PhotoListItem = (props) => {
+const PhotoListItem = ({photo}) => {
 
-  const {location: {city, country}, urls: {full, regular}, user: {username, name, profile}} = props.photo;
+  const {location: {city, country}, urls: {full, regular}, user: {username, name, profile}} = photo;
   return (
     <div className="photo-list__item">
       <PhotoFavButton />
