@@ -4,7 +4,6 @@ import FavIcon from './FavIcon';
 import '../styles/FavBadge.scss';
 
 const FavBadge = ({ favourites }) => {
-  console.log(favourites);
   return (
     <div className="fav-badge">
       <FavIcon
