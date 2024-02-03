@@ -7,7 +7,7 @@ import { useState } from 'react';
 const HomeRoute = ({photos, topics}) => {
   const [favourites, setFavourites] = useState([]);
 
-  const selectFav = (id) => {
+  const toggleFav = (id) => {
     setFavourites((favourites) => {
       if (favourites.includes(id)) {
         return favourites.filter((favId) => favId !== id);
@@ -19,11 +19,8 @@ const HomeRoute = ({photos, topics}) => {
 
   return (
     <div className="home-route">
-      <TopNavigation
-        topics={topics}
-        favourites={favourites}
-      />
-      <PhotoList photos={photos} selectFav={selectFav} />
+      <TopNavigation topics={topics} favourites={favourites} />
+      <PhotoList photos={photos} toggleFav={toggleFav} />
     </div>
   );
 };
