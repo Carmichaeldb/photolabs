@@ -5,9 +5,9 @@ import PhotoFavButton from "./PhotoFavButton";
 const PhotoListItem = ({
   photo,
   favourites,
-  toggleFav,
+  updateFavourites,
   displayModal,
-  favButtonState
+  isPhotoFavourite,
 }) => {
   const {
     id,
@@ -20,9 +20,9 @@ const PhotoListItem = ({
     <div className="photo-list__item">
       <PhotoFavButton
         favourites={favourites}
-        toggleFav={toggleFav}
+        updateFavourites={updateFavourites}
         photoId={id}
-        favButtonState={favButtonState}
+        isPhotoFavourite={isPhotoFavourite}
       />
       <img
         className="photo-list__image"

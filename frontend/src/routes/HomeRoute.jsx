@@ -8,8 +8,8 @@ const HomeRoute = ({
   topics,
   displayModal,
   favourites,
-  toggleFav,
-  favButtonState
+  updateFavourites,
+  isPhotoFavourite,
 }) => {
   return (
     <div className="home-route">
@@ -17,8 +17,8 @@ const HomeRoute = ({
       <PhotoList
         photos={photos}
         favourites={favourites}
-        toggleFav={toggleFav}
-        favButtonState={favButtonState}
+        updateFavourites={updateFavourites}
+        isPhotoFavourite={isPhotoFavourite}
         displayModal={displayModal}
       />
     </div>

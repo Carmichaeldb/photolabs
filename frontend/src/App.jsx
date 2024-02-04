@@ -11,12 +11,12 @@ import useApplicationData from './hooks/useApplicationData';
 const App = () => {
   const {
     favourites,
-    toggleFav,
+    updateFavourites,
     showModal,
     displayModal,
     closeModal,
-    favButtonState
-  } = useApplicationData(photos);
+    isPhotoFavourite,
+  } = useApplicationData();
   return (
     <div className="App">
       <HomeRoute
@@ -24,16 +24,16 @@ const App = () => {
         topics={topics}
         displayModal={displayModal}
         favourites={favourites}
-        toggleFav={toggleFav}
-        favButtonState={favButtonState}
+        updateFavourites={updateFavourites}
+        isPhotoFavourite={isPhotoFavourite}
       />
       {showModal.show && (
         <PhotoDetailsModal
           closeModal={closeModal}
-          photo={showModal.modalPhoto}
-          toggleFav={toggleFav}
+          photo={photos.find((photo) => photo.id === showModal.photoId)}
+          updateFavourites={updateFavourites}
           favourites={favourites}
-          favButtonState={favButtonState}
+          isPhotoFavourite={isPhotoFavourite}
         />
       )}
     </div>

@@ -6,9 +6,9 @@ import PhotoListItem from "./PhotoListItem";
 const PhotoList = ({
   photos,
   favourites,
-  toggleFav,
+  updateFavourites,
   displayModal,
-  favButtonState
+  isPhotoFavourite,
 }) => {
   return (
     <ul className="photo-list">
@@ -17,9 +17,9 @@ const PhotoList = ({
           <PhotoListItem
             photo={photo}
             favourites={favourites}
-            toggleFav={toggleFav}
+            updateFavourites={updateFavourites}
             displayModal={displayModal}
-            favButtonState={favButtonState}
+            isPhotoFavourite={isPhotoFavourite}
           />
         </li>
       ))}

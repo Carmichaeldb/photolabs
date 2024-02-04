@@ -9,8 +9,8 @@ const PhotoDetailsModal = ({
   closeModal,
   photo,
   favourites,
-  toggleFav,
-  favButtonState
+  updateFavourites,
+  isPhotoFavourite,
 }) => {
   const {
     id,
@@ -30,10 +30,10 @@ const PhotoDetailsModal = ({
           <img src={closeSymbol} alt="close symbol" />
         </button>
         <PhotoFavButton
-          toggleFav={toggleFav}
+          updateFavourites={updateFavourites}
           favourites={favourites}
           photoId={id}
-          favButtonState={favButtonState}
+          isPhotoFavourite={isPhotoFavourite}
         />
         <img className="photo-details-modal__image" src={full} />
         <div className="photo-details-modal__photographer-details">
@@ -52,8 +52,8 @@ const PhotoDetailsModal = ({
         <PhotoList
           photos={similarPhotosArray}
           favourites={favourites}
-          toggleFav={toggleFav}
-          favButtonState={favButtonState}
+          updateFavourites={updateFavourites}
+          isPhotoFavourite={isPhotoFavourite}
         />
       </div>
     </div>

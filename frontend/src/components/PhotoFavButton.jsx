@@ -3,11 +3,19 @@ import React from 'react';
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-const PhotoFavButton = ({ photoId, toggleFav, favourites, favButtonState }) => {
+const PhotoFavButton = ({
+  photoId,
+  updateFavourites,
+  favourites,
+  isPhotoFavourite,
+}) => {
   return (
-    <div className="photo-list__fav-icon" onClick={() => toggleFav(photoId)}>
+    <div
+      className="photo-list__fav-icon"
+      onClick={() => updateFavourites(photoId)}
+    >
       <div className="photo-list__fav-icon-svg">
-        <FavIcon selected={favButtonState(photoId, favourites)} />
+        <FavIcon selected={isPhotoFavourite(photoId, favourites)} />
       </div>
     </div>
   );

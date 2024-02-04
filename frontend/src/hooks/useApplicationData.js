@@ -1,9 +1,9 @@
 import {useState} from 'react';
 
-const useApplicationData = (photos) => {
+const useApplicationData = () => {
   //favourites state
   const [favourites, setFavourites] = useState([]);
-  const toggleFav = (id) => {
+  const updateFavourites = (id) => {
     setFavourites((favourites) => {
       if (favourites.includes(id)) {
         return favourites.filter((favId) => favId !== id);
@@ -15,21 +15,20 @@ const useApplicationData = (photos) => {
   //modal state
   const [showModal, setShowModal] = useState({ show: false, photoId: null });
   const displayModal = (photoId) => {
-    const modalPhoto = photos.find((photo) => photo.id === photoId);
-    setShowModal({ show: true, modalPhoto });
+    setShowModal({ show: true, photoId });
   };
   const closeModal = () => setShowModal({ show: false, photoId: null });
 
   //favourite button state;
-  const favButtonState = (photoId, favourites) => favourites.includes(photoId);
+  const isPhotoFavourite = (photoId, favourites) => favourites.includes(photoId);
 
   return {
     favourites,
-    toggleFav,
+    updateFavourites,
     showModal,
     displayModal,
     closeModal,
-    favButtonState
+    isPhotoFavourite,
   };
 
 };
