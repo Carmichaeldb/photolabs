@@ -2,7 +2,13 @@ import React from "react";
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-const PhotoListItem = ({ photo, favourites, toggleFav, displayModal }) => {
+const PhotoListItem = ({
+  photo,
+  favourites,
+  toggleFav,
+  displayModal,
+  favButtonState
+}) => {
   const {
     id,
     location: { city, country },
@@ -12,8 +18,17 @@ const PhotoListItem = ({ photo, favourites, toggleFav, displayModal }) => {
 
   return (
     <div className="photo-list__item">
-      <PhotoFavButton favourites={favourites} toggleFav={toggleFav} photoId={id} />
-      <img className="photo-list__image" src={regular} onClick={() => displayModal(id)} />
+      <PhotoFavButton
+        favourites={favourites}
+        toggleFav={toggleFav}
+        photoId={id}
+        favButtonState={favButtonState}
+      />
+      <img
+        className="photo-list__image"
+        src={regular}
+        onClick={() => displayModal(id)}
+      />
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={profile} />
         <div className="photo-list__user-info">

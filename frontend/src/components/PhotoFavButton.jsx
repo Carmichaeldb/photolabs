@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-const PhotoFavButton = ({ photoId, toggleFav, favourites }) => {
-  const [selected, setSelected] = useState(false);
-  useEffect(() => {
-    console.log(selected);
-    console.log(favourites);
-    if (favourites.includes(photoId)) {
-      setSelected(true);
-    } else {
-      setSelected(false);
-    }
-  });
-
+const PhotoFavButton = ({ photoId, toggleFav, favourites, favButtonState }) => {
   return (
     <div className="photo-list__fav-icon" onClick={() => toggleFav(photoId)}>
       <div className="photo-list__fav-icon-svg">
-        <FavIcon selected={selected} />
+        <FavIcon selected={favButtonState(photoId, favourites)} />
       </div>
     </div>
   );

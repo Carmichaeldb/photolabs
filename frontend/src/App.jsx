@@ -1,34 +1,41 @@
-import {React, useState} from 'react';
+import React from 'react';
 import './App.scss';
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 import topics from "./mocks/topics";
 import photos from "./mocks/photos";
+import useApplicationData from './hooks/useApplicationData';
 
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
-  const [favourites, setFavourites] = useState([]);
-  const toggleFav = (id) => {
-    setFavourites((favourites) => {
-      if (favourites.includes(id)) {
-        return favourites.filter((favId) => favId !== id);
-      }
-      return [...favourites, id];
-    });
-  };
-
-  const [showModal, setShowModal] = useState({show: false, photoId: null});
-  const displayModal = (photoId) => {
-    const modalPhoto = photos.find((photo) => photo.id === photoId);
-    setShowModal({show: true, modalPhoto});
-  };
-  const closeModal = () => setShowModal({show: false, photoId: null});
-
+  const {
+    favourites,
+    toggleFav,
+    showModal,
+    displayModal,
+    closeModal,
+    favButtonState
+  } = useApplicationData(photos);
   return (
     <div className="App">
-      <HomeRoute photos={photos} topics={topics} displayModal={displayModal} favourites={favourites} toggleFav={toggleFav} />
-      {showModal.show && <PhotoDetailsModal closeModal={closeModal} photo={showModal.modalPhoto} toggleFav={toggleFav} favourites={favourites} />}
+      <HomeRoute
+        photos={photos}
+        topics={topics}
+        displayModal={displayModal}
+        favourites={favourites}
+        toggleFav={toggleFav}
+        favButtonState={favButtonState}
+      />
+      {showModal.show && (
+        <PhotoDetailsModal
+          closeModal={closeModal}
+          photo={showModal.modalPhoto}
+          toggleFav={toggleFav}
+          favourites={favourites}
+          favButtonState={favButtonState}
+        />
+      )}
     </div>
   );
 };
