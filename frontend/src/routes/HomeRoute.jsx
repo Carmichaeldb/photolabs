@@ -4,22 +4,12 @@ import TopNavigation from '../components/TopNavigationBar';
 import PhotoList from '../components/PhotoList';
 import { useState } from 'react';
 
-const HomeRoute = ({photos, topics, displayModal}) => {
-  const [favourites, setFavourites] = useState([]);
-
-  const toggleFav = (id) => {
-    setFavourites((favourites) => {
-      if (favourites.includes(id)) {
-        return favourites.filter((favId) => favId !== id);
-      }
-      return [...favourites, id];
-    });
-  };
+const HomeRoute = ({photos, topics, displayModal, favourites, toggleFav}) => {
 
   return (
     <div className="home-route">
       <TopNavigation topics={topics} favourites={favourites} />
-      <PhotoList photos={photos} toggleFav={toggleFav} displayModal={displayModal} />
+      <PhotoList photos={photos} favourites={favourites} toggleFav={toggleFav} displayModal={displayModal} />
     </div>
   );
 };

@@ -3,8 +3,9 @@ import React from 'react';
 import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from 'components/PhotoList';
+import PhotoFavButton from 'components/PhotoFavButton';
 
-const PhotoDetailsModal = ({closeModal, photo}) => {
+const PhotoDetailsModal = ({closeModal, photo, favourites, toggleFav}) => {
   const {
     id,
     location: { city, country },
@@ -22,6 +23,7 @@ const PhotoDetailsModal = ({closeModal, photo}) => {
         >
           <img src={closeSymbol} alt="close symbol" />
         </button>
+        <PhotoFavButton toggleFav={toggleFav} favourites={favourites} photoId={id} />
         <img className="photo-details-modal__image" src={full} />
         <div className="photo-details-modal__photographer-details">
           <img
@@ -36,7 +38,7 @@ const PhotoDetailsModal = ({closeModal, photo}) => {
           </div>
         </div>
         <div className="photo-details-modal__header">Similar Photos</div>
-        <PhotoList photos={similarPhotosArray} />
+        <PhotoList photos={similarPhotosArray} favourites={favourites} toggleFav={toggleFav} />
       </div>
     </div>
   );
