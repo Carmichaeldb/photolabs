@@ -18,8 +18,8 @@ const PhotoDetailsModal = ({
     urls: { full },
     user: { username, profile },
   } = photo;
-  const similarPhotosArray = Object.values(photo.similarPhotos);
-
+  const similarPhotosArray = Object.values(photo.similar_photos);
+  
   return (
     <div className="photo-details-modal">
       <div className="photo-details-modal__images">
