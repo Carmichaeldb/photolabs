@@ -12,6 +12,7 @@ const App = () => {
     displayModal,
     closeModal,
     isPhotoFavourite,
+    photosByTopic,
     state
   } = useApplicationData();
   return (
@@ -23,6 +24,7 @@ const App = () => {
         favourites={state.favourites}
         updateFavourites={updateFavourites}
         isPhotoFavourite={isPhotoFavourite}
+        photosByTopic={photosByTopic}
       />
       {state.showModal && (
         <PhotoDetailsModal

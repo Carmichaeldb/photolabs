@@ -1,11 +1,11 @@
 import React from "react";
 import "../styles/TopicListItem.scss";
 
-const TopicListItem = ({topic}) => {
-  const {title} = topic;
+const TopicListItem = ({ topic, photosByTopic }) => {
+  const { id, title } = topic;
   return (
     <div className="topic-list__item">
-      <span>{title}</span>
+      <span onClick={() => photosByTopic(id)}>{title}</span>
     </div>
   );
 };

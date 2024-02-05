@@ -10,10 +10,15 @@ const HomeRoute = ({
   favourites,
   updateFavourites,
   isPhotoFavourite,
+  photosByTopic
 }) => {
   return (
     <div className="home-route">
-      <TopNavigation topics={topics} favourites={favourites} />
+      <TopNavigation
+        topics={topics}
+        favourites={favourites}
+        photosByTopic={photosByTopic}
+      />
       <PhotoList
         photos={photos}
         favourites={favourites}
