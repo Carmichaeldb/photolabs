@@ -10,6 +10,7 @@ const HomeRoute = ({
   favourites,
   updateFavourites,
   isPhotoFavourite,
+  allPhotos,
   photosByTopic
 }) => {
   return (
@@ -17,6 +18,7 @@ const HomeRoute = ({
       <TopNavigation
         topics={topics}
         favourites={favourites}
+        allPhotos={allPhotos}
         photosByTopic={photosByTopic}
       />
       <PhotoList

@@ -1,12 +1,12 @@
 import { useReducer, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 const initialState = {
   photoData: [],
   topicData: [],
   favourites: [],
   showModal: false,
-  photoId: null
+  photoId: null,
 };
 
 const ACTIONS = {
@@ -29,9 +29,9 @@ const reducer = (state, action) => {
       favourites: state.favourites.filter((favId) => favId !== action.data),
     };
   case ACTIONS.SET_PHOTO_DATA:
-    return { ...state, photoData: action.data};
+    return { ...state, photoData: action.data };
   case ACTIONS.SET_TOPIC_DATA:
-    return { ...state, topicData: action.data};
+    return { ...state, topicData: action.data };
   case ACTIONS.SHOW_MODAL:
     return { ...state, showModal: true, photoId: action.data };
   case ACTIONS.CLOSE_MODAL:
@@ -48,37 +48,15 @@ const reducer = (state, action) => {
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    axios.get("/api/photos")
-      .then(res => dispatch({type: ACTIONS.SET_PHOTO_DATA, data: res.data}))
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }, []);
-
-  useEffect(() => {
-    axios.get("/api/topics")
-      .then((res) => dispatch({ type: ACTIONS.SET_TOPIC_DATA, data: res.data }))
+  // API GET REQUESTS
+  const allPhotos = () => {
+    axios
+      .get("/api/photos")
+      .then((res) => dispatch({ type: ACTIONS.SET_PHOTO_DATA, data: res.data }))
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, []);
-
-  //favourites
-  const updateFavourites = (id) => {
-    if (state.favourites.includes(id)) {
-      dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, data: id });
-    } else {
-      dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, data: id });
-    }
   };
-
-  //modal state
-  const displayModal = (photoId) => dispatch({ type: ACTIONS.SHOW_MODAL, data: photoId });
-  const closeModal = () => dispatch({ type: ACTIONS.CLOSE_MODAL });
-
-  //favourite button state;
-  const isPhotoFavourite = (photoId) => state.favourites.includes(photoId);
 
   const photosByTopic = (topicId) => {
     axios
@@ -91,11 +69,42 @@ const useApplicationData = () => {
       });
   };
 
+  useEffect(() => {
+    allPhotos();
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("/api/topics")
+      .then((res) => dispatch({ type: ACTIONS.SET_TOPIC_DATA, data: res.data }))
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+  //favourites management
+  const updateFavourites = (id) => {
+    if (state.favourites.includes(id)) {
+      dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, data: id });
+    } else {
+      dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, data: id });
+    }
+  };
+
+  //favourite button state;
+  const isPhotoFavourite = (photoId) => state.favourites.includes(photoId);
+
+  //modal state
+  const displayModal = (photoId) =>
+    dispatch({ type: ACTIONS.SHOW_MODAL, data: photoId });
+  const closeModal = () => dispatch({ type: ACTIONS.CLOSE_MODAL });
+
   return {
     updateFavourites,
     displayModal,
     closeModal,
     isPhotoFavourite,
+    allPhotos,
     photosByTopic,
     state,
   };
