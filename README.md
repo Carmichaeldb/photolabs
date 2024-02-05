@@ -1,4 +1,4 @@
-# react-photolabs
+### react-photolabs
 Please note the PhotoLabs project for the Web Development React course programming run by Lighthouse Labs.
 
 # Photolabs
