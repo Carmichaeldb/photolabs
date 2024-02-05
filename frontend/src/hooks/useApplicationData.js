@@ -1,36 +1,64 @@
-import {useState} from 'react';
+import { useReducer } from "react";
+
+const initialState = {
+  favourites: [],
+  showModal: false,
+  photoId: null
+};
+
+const ACTIONS = {
+  FAV_PHOTO_ADDED: "FAV_PHOTO_ADDED",
+  FAV_PHOTO_REMOVED: "FAV_PHOTO_REMOVED",
+  SHOW_MODAL: "SHOW_MODAL",
+  CLOSE_MODAL: "CLOSE_MODAL",
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+  case ACTIONS.FAV_PHOTO_ADDED:
+    return { ...state, favourites: [...state.favourites, action.data] };
+  case ACTIONS.FAV_PHOTO_REMOVED:
+    return {
+      ...state,
+      favourites: state.favourites.filter((favId) => favId !== action.data),
+    };
+  case ACTIONS.SHOW_MODAL:
+    return { ...state, showModal: true, photoId: action.data };
+  case ACTIONS.CLOSE_MODAL:
+    return { ...state, showModal: false, photoId: null };
+  default:
+    throw new Error(
+      `Tried to reduce with unsupported action type: ${action.type}`
+    );
+  }
+};
 
 const useApplicationData = () => {
-  //favourites state
-  const [favourites, setFavourites] = useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  //favourites
   const updateFavourites = (id) => {
-    setFavourites((favourites) => {
-      if (favourites.includes(id)) {
-        return favourites.filter((favId) => favId !== id);
-      }
-      return [...favourites, id];
-    });
+    if (state.favourites.includes(id)) {
+      dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, data: id });
+    } else {
+      dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, data: id });
+    }
   };
 
   //modal state
-  const [showModal, setShowModal] = useState({ show: false, photoId: null });
-  const displayModal = (photoId) => {
-    setShowModal({ show: true, photoId });
-  };
-  const closeModal = () => setShowModal({ show: false, photoId: null });
+  const displayModal = (photoId) => dispatch({ type: ACTIONS.SHOW_MODAL, data: photoId });
+  const closeModal = () => dispatch({ type: ACTIONS.CLOSE_MODAL });
 
   //favourite button state;
-  const isPhotoFavourite = (photoId, favourites) => favourites.includes(photoId);
+  const isPhotoFavourite = (photoId) => state.favourites.includes(photoId);
 
   return {
-    favourites,
     updateFavourites,
-    showModal,
     displayModal,
     closeModal,
     isPhotoFavourite,
+    state,
   };
-
 };
 
 export default useApplicationData;

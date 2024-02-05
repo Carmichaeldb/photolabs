@@ -10,12 +10,11 @@ import useApplicationData from './hooks/useApplicationData';
 // Note: Rendering a single component to build components in isolation
 const App = () => {
   const {
-    favourites,
     updateFavourites,
-    showModal,
     displayModal,
     closeModal,
     isPhotoFavourite,
+    state
   } = useApplicationData();
   return (
     <div className="App">
@@ -23,16 +22,16 @@ const App = () => {
         photos={photos}
         topics={topics}
         displayModal={displayModal}
-        favourites={favourites}
+        favourites={state.favourites}
         updateFavourites={updateFavourites}
         isPhotoFavourite={isPhotoFavourite}
       />
-      {showModal.show && (
+      {state.showModal && (
         <PhotoDetailsModal
           closeModal={closeModal}
-          photo={photos.find((photo) => photo.id === showModal.photoId)}
+          photo={photos.find((photo) => photo.id === state.photoId)}
           updateFavourites={updateFavourites}
-          favourites={favourites}
+          favourites={state.favourites}
           isPhotoFavourite={isPhotoFavourite}
         />
       )}
