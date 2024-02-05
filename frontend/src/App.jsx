@@ -2,8 +2,6 @@ import React from 'react';
 import './App.scss';
 import HomeRoute from 'routes/HomeRoute';
 import PhotoDetailsModal from 'routes/PhotoDetailsModal';
-import topics from "./mocks/topics";
-import photos from "./mocks/photos";
 import useApplicationData from './hooks/useApplicationData';
 
 
@@ -19,8 +17,8 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute
-        photos={photos}
-        topics={topics}
+        photos={state.photoData}
+        topics={state.topicData}
         displayModal={displayModal}
         favourites={state.favourites}
         updateFavourites={updateFavourites}
@@ -29,7 +27,7 @@ const App = () => {
       {state.showModal && (
         <PhotoDetailsModal
           closeModal={closeModal}
-          photo={photos.find((photo) => photo.id === state.photoId)}
+          photo={state.photoData.find((photo) => photo.id === state.photoId)}
           updateFavourites={updateFavourites}
           favourites={state.favourites}
           isPhotoFavourite={isPhotoFavourite}
