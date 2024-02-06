@@ -32,7 +32,7 @@ const PhotoDetailsModal = ({
         <PhotoFavButton
           updateFavourites={updateFavourites}
           favourites={favourites}
-          photoId={id}
+          photo={photo}
           isPhotoFavourite={isPhotoFavourite}
         />
         <img className="photo-details-modal__image" src={full} />
@@ -49,12 +49,14 @@ const PhotoDetailsModal = ({
           </div>
         </div>
         <div className="photo-details-modal__header">Similar Photos</div>
-        <PhotoList
-          photos={similarPhotosArray}
-          favourites={favourites}
-          updateFavourites={updateFavourites}
-          isPhotoFavourite={isPhotoFavourite}
-        />
+        <div className="photo-details-modal__similar-photo-list">
+          <PhotoList
+            photos={similarPhotosArray}
+            favourites={favourites}
+            updateFavourites={updateFavourites}
+            isPhotoFavourite={isPhotoFavourite}
+          />
+        </div>
       </div>
     </div>
   );

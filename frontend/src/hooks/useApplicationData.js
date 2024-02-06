@@ -26,7 +26,7 @@ const reducer = (state, action) => {
   case ACTIONS.FAV_PHOTO_REMOVED:
     return {
       ...state,
-      favourites: state.favourites.filter((favId) => favId !== action.data),
+      favourites: state.favourites.filter((favPhoto) => favPhoto.id !== action.data.id),
     };
   case ACTIONS.SET_PHOTO_DATA:
     return { ...state, photoData: action.data };
@@ -91,7 +91,7 @@ const useApplicationData = () => {
 
   //favourites management
   const updateFavourites = (photo) => {
-    if (state.favourites.includes(photo)) {
+    if (state.favourites.some(favPhoto => favPhoto.id === photo.id)) {
       dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, data: photo });
     } else {
       dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, data: photo });

@@ -26,6 +26,7 @@
 
 .photo-details-modal__images {
   margin-left: 36px;
+  margin-right: 5px;
   margin-top: 8px;
 }
 
@@ -74,4 +75,11 @@
   font-weight: 700;
   font-size: 12px;
   margin-left: 8px;
+}
+
+.photo-details-modal__similar-photo-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 95%;
 }
