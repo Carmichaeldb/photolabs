@@ -78,9 +78,6 @@ const useApplicationData = () => {
 
   useEffect(() => {
     allPhotos();
-  }, []);
-
-  useEffect(() => {
     axios
       .get("/api/topics")
       .then((res) => dispatch({ type: ACTIONS.SET_TOPIC_DATA, data: res.data }))
