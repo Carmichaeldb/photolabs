@@ -62,11 +62,18 @@ const useApplicationData = () => {
     axios
       .get(`/api/topics/photos/${topicId}`)
       .then((res) =>
-        dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, data: res.data })
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, data: res.data })
       )
       .catch((error) => {
         console.error("Error:", error);
       });
+  };
+
+  const favouritePhotos = (favourites) => {
+    if (favourites.length !== 0) {
+      return dispatch({ type: ACTIONS.SET_PHOTO_DATA, data: favourites });
+    }
+    return null;
   };
 
   useEffect(() => {
@@ -83,16 +90,16 @@ const useApplicationData = () => {
   }, []);
 
   //favourites management
-  const updateFavourites = (id) => {
-    if (state.favourites.includes(id)) {
-      dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, data: id });
+  const updateFavourites = (photo) => {
+    if (state.favourites.includes(photo)) {
+      dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, data: photo });
     } else {
-      dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, data: id });
+      dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, data: photo });
     }
   };
 
   //favourite button state;
-  const isPhotoFavourite = (photoId) => state.favourites.includes(photoId);
+  const isPhotoFavourite = (photo) => state.favourites.some(fav => fav.id === photo.id);
 
   //modal state
   const displayModal = (photoId) =>
@@ -106,6 +113,7 @@ const useApplicationData = () => {
     isPhotoFavourite,
     allPhotos,
     photosByTopic,
+    favouritePhotos,
     state,
   };
 };

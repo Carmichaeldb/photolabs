@@ -21,7 +21,7 @@ const PhotoListItem = ({
       <PhotoFavButton
         favourites={favourites}
         updateFavourites={updateFavourites}
-        photoId={id}
+        photo={photo}
         isPhotoFavourite={isPhotoFavourite}
       />
       <img

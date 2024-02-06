@@ -4,7 +4,7 @@ import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 const PhotoFavButton = ({
-  photoId,
+  photo,
   updateFavourites,
   favourites,
   isPhotoFavourite,
@@ -12,10 +12,10 @@ const PhotoFavButton = ({
   return (
     <div
       className="photo-list__fav-icon"
-      onClick={() => updateFavourites(photoId)}
+      onClick={() => updateFavourites(photo)}
     >
       <div className="photo-list__fav-icon-svg">
-        <FavIcon selected={isPhotoFavourite(photoId, favourites)} />
+        <FavIcon selected={isPhotoFavourite(photo, favourites)} />
       </div>
     </div>
   );

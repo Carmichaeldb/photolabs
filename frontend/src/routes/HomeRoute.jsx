@@ -11,7 +11,8 @@ const HomeRoute = ({
   updateFavourites,
   isPhotoFavourite,
   allPhotos,
-  photosByTopic
+  photosByTopic,
+  favouritePhotos
 }) => {
   return (
     <div className="home-route">
@@ -20,6 +21,7 @@ const HomeRoute = ({
         favourites={favourites}
         allPhotos={allPhotos}
         photosByTopic={photosByTopic}
+        favouritePhotos={favouritePhotos}
       />
       <PhotoList
         photos={photos}
